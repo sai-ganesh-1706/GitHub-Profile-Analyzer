@@ -1,26 +1,40 @@
 const axios = require("axios");
 const { saveProfile } = require("../models/profileModel");
-//const redisClient = require("../config/redis");
+// const redisClient = require("../config/redis");
 const logger = require("../utils/logger");
+
+const githubHeaders = {
+  headers: {
+    Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+    Accept: "application/vnd.github+json",
+  },
+};
 
 const analyzeGithubProfile = async (username) => {
   try {
 
     // Check cache first
-    //const cachedProfile = await redisClient.get(username);
+    // const cachedProfile = await redisClient.get(username);
 
-    /*if (cachedProfile) {
+    /*
+    if (cachedProfile) {
       logger.info(`Cache HIT for ${username}`);
-
       return JSON.parse(cachedProfile);
     }
 
-    logger.info(`Cache MISS for ${username}`);*/
+    logger.info(`Cache MISS for ${username}`);
+    */
 
     // Run both API calls in parallel
     const [userResponse, repoResponse] = await Promise.all([
-      axios.get(`https://api.github.com/users/${username}`),
-      axios.get(`https://api.github.com/users/${username}/repos`)
+      axios.get(
+        `https://api.github.com/users/${username}`,
+        githubHeaders
+      ),
+      axios.get(
+        `https://api.github.com/users/${username}/repos`,
+        githubHeaders
+      ),
     ]);
 
     const user = userResponse.data;
@@ -62,17 +76,17 @@ const analyzeGithubProfile = async (username) => {
       account_created_at: new Date(user.created_at),
     };
 
-    // Save in MySQL
     await saveProfile(profileData);
 
-    /*// Cache for 1 hour
+    /*
     await redisClient.set(
       username,
       JSON.stringify(profileData),
       {
         EX: 3600,
       }
-    );*/
+    );
+    */
 
     logger.info(
       `Profile analyzed successfully: ${username}`
