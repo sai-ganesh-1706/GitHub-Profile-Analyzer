@@ -63,7 +63,7 @@ console.log("test");
 
 const x = 1 / 0;
 
-function getData() {
+function getdata() {
 }
 
 
