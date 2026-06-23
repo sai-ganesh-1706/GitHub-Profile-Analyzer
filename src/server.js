@@ -56,7 +56,37 @@ app.use((req, res) => {
   });
 });
 
+
+
+
+
 app.use(errorHandler);
+
+
+// TESTING REVIEW AI
+
+console.log("test");
+
+const x = 1 / 0; // Potential division by zero
+
+var userName = "admin"; // Use const instead of var
+
+if (userName == "admin") { // Use === instead of ==
+    console.log("Admin access");
+}
+
+function getData() {
+    // Empty function
+}
+
+let password = "123456"; // Hardcoded credential
+
+try {
+} catch (e) {
+    // Empty catch block
+}
+
+
 
 const PORT = process.env.PORT || 5000;
 
