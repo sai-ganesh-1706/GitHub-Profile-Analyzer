@@ -56,6 +56,21 @@ app.use((req, res) => {
   });
 });
 
+
+
+//TESTING
+console.log("test");
+
+const x = 1 / 0;
+
+function getData() {
+}
+
+
+
+
+
+
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
