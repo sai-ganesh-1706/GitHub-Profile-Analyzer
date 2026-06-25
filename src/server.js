@@ -58,6 +58,13 @@ app.use((req, res) => {
 
 app.use(errorHandler);
 
+
+const val = 1/10;
+console.log(val);
+
+const a =10;
+a = 7;
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, "0.0.0.0", () => {
