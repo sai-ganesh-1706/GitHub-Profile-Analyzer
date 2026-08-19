@@ -1,3 +1,4 @@
+#Project
 # GitHub Profile Analyzer API
 
 A backend service built with Node.js, Express.js, MySQL, and GitHub API that analyzes GitHub profiles, generates useful insights, and stores the results in a MySQL database.
